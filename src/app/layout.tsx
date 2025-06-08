@@ -1,4 +1,5 @@
 import Navbar from '@/components/navbar';
+import { SkipNav } from '@/components/skip-nav';
 import { ThemeProvider } from '@/components/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { DATA } from '@/data/resume';
@@ -68,6 +69,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider delayDuration={0}>
+            <SkipNav />
             {children}
             <Navbar />
           </TooltipProvider>

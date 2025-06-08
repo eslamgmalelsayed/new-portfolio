@@ -19,7 +19,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
+    <main id="main-content" className="flex flex-col min-h-[100dvh] space-y-10">
       <ScrollProgress className="h-1" />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -42,9 +42,8 @@ export default function Page() {
               <CoolMode>
                 <Avatar className="size-28 border cursor-pointer">
                   <AvatarImage
-                    alt={DATA.name}
+                    alt={`Portrait photo of ${DATA.name}`}
                     src={DATA.avatarUrl}
-                    loading="lazy"
                   />
                   <AvatarFallback>{DATA.initials}</AvatarFallback>
                 </Avatar>
@@ -214,6 +213,7 @@ export default function Page() {
                 <Link
                   href={DATA.contact.social.email.url}
                   className="text-blue-500 hover:underline"
+                  aria-label="Send email to Eslam Gamal"
                 >
                   via email
                 </Link>{' '}
@@ -221,6 +221,9 @@ export default function Page() {
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   className="text-blue-500 hover:underline"
+                  aria-label="Connect on LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   LinkedIn
                 </Link>
