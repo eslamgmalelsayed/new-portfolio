@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# LCP optimization - preload critical image
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = "</me.webp>; rel=preload; as=image; fetchpriority=high"
+
 # Headers for modern JavaScript and assets
 [[headers]]
   for = "*.js"
