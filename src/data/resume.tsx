@@ -144,5 +144,32 @@ export const DATA = {
       image: '',
       video: '/task-preview.mp4',
     },
+    {
+      title: 'Thought Cache',
+      href: 'https://thought-cache.netlify.app',
+      dates: '2025',
+      active: true,
+      description:
+        'A modern note-taking and thought management application that helps users capture, organize, and retrieve their ideas efficiently. Features a clean interface for managing personal thoughts and notes with search and categorization capabilities.',
+      technologies: [
+        'Nuxt.js',
+        'TypeScript',
+        'Tailwind CSS',
+        'Nuxt UI',
+        'Supabase',
+        'Clerk',
+        'Zod',
+        'VueI18n',
+      ],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://thought-cache.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './thoughts-preview.mp4',
+    },
   ],
 } as const;

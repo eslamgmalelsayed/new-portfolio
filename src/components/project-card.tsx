@@ -75,7 +75,7 @@ export function ProjectCard({
         <div className="space-y-1">
           <div className="flex justify-between items-center">
             <CardTitle className="mt-1 text-base">{title}</CardTitle>
-            <time className="font-sans text-xs">{dates}</time>
+            <Badge variant="secondary" className="font-sans text-xs">{dates}</Badge>
           </div>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace('https://', '').replace('www.', '').replace('/', '')}
@@ -85,7 +85,7 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
-      <CardContent className="mt-auto flex flex-col px-2">
+      <CardContent className="mt-auto flex flex-col p-2">
         {tags && tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {tags?.map((tag) => (
