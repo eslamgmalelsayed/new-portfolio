@@ -123,21 +123,26 @@ export const DATA = {
   ],
   projects: [
     {
-      title: 'Project Name',
-      href: 'https://project-url.com',
-      dates: '',
+      title: 'Task Manager',
+      href: 'https://taske-manager.netlify.app',
+      dates: '2025',
       active: true,
-      description: 'Description of your project and what it does',
-      technologies: ['Vue.js', 'JavaScript', 'CSS', 'etc...'],
+      description:
+        'A task manager application built with nextjs and TypeScript. It allows you to create, edit, and delete tasks, as well as mark them as completed or pending. it also has authentication and authorization with supabase.',
+      technologies: [
+        'Next.js',
+        'TypeScript',
+        'Tailwind CSS',
+        'Zod','Supabase'],
       links: [
         {
-          type: 'Website',
-          href: 'https://project-url.com',
+          type: 'Demo',
+          href: 'https://taske-manager.netlify.app',
           icon: <Icons.globe className="size-3" />,
         },
       ],
       image: '',
-      video: 'https://cdn.llm.report/openai-demo.mp4',
+      video: '/task-preview.mp4',
     },
   ],
 } as const;
