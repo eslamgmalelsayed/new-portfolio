@@ -122,6 +122,24 @@ export const DATA = {
     },
   ],
   projects: [
+      {
+      title: 'Najiz Sa',
+      href: 'https://najiz.sa/applications/landing',
+      dates: '2022',
+      active: true,
+      description:
+        'Digital platform in Saudi Arabia that facilitates various government services, primarily focused on legal and judicial services. It provides users with a range of features.',
+      technologies: ['Vue.js','TypeScript','Vuetify','VueI18n'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://najiz.sa/applications/landing',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: '/najiz-preview.mp4',
+    },
     {
       title: 'Task Manager',
       href: 'https://taske-manager.netlify.app',
