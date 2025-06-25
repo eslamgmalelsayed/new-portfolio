@@ -24,6 +24,7 @@ export const DATA = {
     'CSS3',
     'SASS',
     'Tailwind CSS',
+    'Angular Material',
     'Bootstrap',
     'Vuetify',
     'RESTful APIs',
