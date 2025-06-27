@@ -11,6 +11,14 @@ import { OptimizedImage } from '@/components/optimized-image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 
+// Technology brand colors mapping for first chip only
+const TECH_COLORS: Record<string, { bg: string; text: string }> = {
+  'Vue.js': { bg: 'bg-[#4FC08D]', text: 'text-white' },
+  'Nuxt.js': { bg: 'bg-[#00DC82]', text: 'text-white' },
+  'Next.js': { bg: 'bg-[#000000]', text: 'text-white' },
+  Angular: { bg: 'bg-[#DD0031]', text: 'text-white' },
+};
+
 interface Props {
   title: string;
   href?: string;
@@ -75,7 +83,9 @@ export function ProjectCard({
         <div className="space-y-1">
           <div className="flex justify-between items-center">
             <CardTitle className="mt-1 text-base">{title}</CardTitle>
-            <Badge variant="secondary" className="font-sans text-xs">{dates}</Badge>
+            <Badge variant="secondary" className="font-sans text-xs">
+              {dates}
+            </Badge>
           </div>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace('https://', '').replace('www.', '').replace('/', '')}
@@ -88,15 +98,26 @@ export function ProjectCard({
       <CardContent className="mt-auto flex flex-col p-2">
         {tags && tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
-            {tags?.map((tag) => (
-              <Badge
-                className="px-1 py-0 text-[10px]"
-                variant="secondary"
-                key={tag}
-              >
-                {tag}
-              </Badge>
-            ))}
+            {tags?.map((tag, index) => {
+              const isFirstTag = index === 0;
+              const techColor = TECH_COLORS[tag];
+              const shouldUseBrandColor = isFirstTag && techColor;
+
+              return (
+                <Badge
+                  className={cn(
+                    'px-1 py-0 text-[10px]',
+                    shouldUseBrandColor
+                      ? `${techColor.bg} ${techColor.text} hover:opacity-80`
+                      : ''
+                  )}
+                  variant={shouldUseBrandColor ? undefined : 'secondary'}
+                  key={tag}
+                >
+                  {tag}
+                </Badge>
+              );
+            })}
           </div>
         )}
       </CardContent>
