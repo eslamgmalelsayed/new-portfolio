@@ -123,14 +123,14 @@ export const DATA = {
     },
   ],
   projects: [
-      {
+    {
       title: 'Najiz Sa',
       href: 'https://najiz.sa/applications/landing',
       dates: '2022',
       active: true,
       description:
         'Digital platform in Saudi Arabia that facilitates various government services, primarily focused on legal and judicial services. It provides users with a range of features.',
-      technologies: ['Vue.js','TypeScript','Vuetify','VueI18n'],
+      technologies: ['Vue.js', 'TypeScript', 'Vuetify', 'VueI18n'],
       links: [
         {
           type: 'Demo',
@@ -152,7 +152,9 @@ export const DATA = {
         'Next.js',
         'TypeScript',
         'Tailwind CSS',
-        'Zod','Supabase'],
+        'Zod',
+        'Supabase',
+      ],
       links: [
         {
           type: 'Demo',
@@ -189,6 +191,31 @@ export const DATA = {
       ],
       image: '',
       video: './thoughts-preview.mp4',
+    },
+    {
+      title: 'Movie Search App',
+      href: 'https://movie-searchhh-app.netlify.app',
+      dates: '2025',
+      active: true,
+      description:
+        'a movie search app built with Angular. It allows you to search for movies and tv shows, and see the details of the movie or tv show.',
+      technologies: [
+        'Angular',
+        'Angular Material',
+        'Angular CLI',
+        'Angular Services',
+        'Angular HttpClient',
+        'Angular Forms',
+      ],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://movie-searchhh-app.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './movie-preview.mp4',
     },
   ],
 } as const;
