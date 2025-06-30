@@ -70,7 +70,7 @@ export const DATA = {
 
   work: [
     {
-      company: 'Ministry Of Justice | KSA',
+      company: 'Ministry Of Justice - KSA',
       href: 'https://www.moj.gov.sa',
       badges: [],
       location: 'Riyadh, Saudi Arabia',
@@ -82,7 +82,7 @@ export const DATA = {
         'Developing and maintaining Vue.js-based applications with a focus on performance and scalability. Solving technical challenges by debugging and optimizing code. Implementing complex business logic and reusable components using Vue.js and TypeScript. Collaborating with back-end teams to integrate RESTful APIs seamlessly.',
     },
     {
-      company: 'Freelancer | Remote',
+      company: 'Freelancer - Remote',
       badges: [],
       href: '',
       location: 'Remote',
@@ -94,7 +94,7 @@ export const DATA = {
         'Contributed to multiple projects by developing responsive and scalable front-end solutions. Delivered consistent UI/UX designs adhering to project requirements. Coordinated closely with team members to deliver high-quality applications on tight deadlines.',
     },
     {
-      company: 'Brainnest | Germany',
+      company: 'Brainnest - Germany',
       href: 'https://brainnest.consulting',
       badges: [],
       location: 'Germany',
