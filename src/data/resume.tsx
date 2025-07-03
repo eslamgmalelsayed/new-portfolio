@@ -217,5 +217,23 @@ export const DATA = {
       image: '',
       video: './movie-preview.mp4',
     },
+    {
+      title: 'Abu Adel Pastry Shop',
+      href: 'https://haliyomak.com',
+      dates: '2021',
+      active: true,
+      description:
+        'A pastry shop website built with javascript. It allows you to see the products and the details of the product.',
+      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery', 'JavaScript'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://haliyomak.com',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './abuadel-preview.mp4',
+    },
   ],
 } as const;
