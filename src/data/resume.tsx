@@ -142,6 +142,24 @@ export const DATA = {
       video: '/najiz-preview.mp4',
     },
     {
+      title: 'Abu Adel Pastry Shop',
+      href: 'https://haliyomak.com',
+      dates: '2021',
+      active: true,
+      description:
+        'A pastry shop website built with javascript. It allows you to see the products and the details of the product.',
+      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery', 'JavaScript'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://haliyomak.com',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './abuadel-preview.mp4',
+    },
+    {
       title: 'Task Manager',
       href: 'https://taske-manager.netlify.app',
       dates: '2025',
@@ -218,22 +236,22 @@ export const DATA = {
       video: './movie-preview.mp4',
     },
     {
-      title: 'Abu Adel Pastry Shop',
-      href: 'https://haliyomak.com',
+      title: 'pubgwy store',
+      href: 'https://eslamgmalelsayed.github.io/pubgwy',
       dates: '2021',
       active: true,
       description:
-        'A pastry shop website built with javascript. It allows you to see the products and the details of the product.',
-      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery', 'JavaScript'],
+        'A pubgwy store website built with javascript. It allows you to see the products and the details of the product.',
+      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery'],
       links: [
         {
           type: 'Demo',
-          href: 'https://haliyomak.com',
+          href: 'https://eslamgmalelsayed.github.io/pubgwy',
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: '',
-      video: './abuadel-preview.mp4',
+      image: './pubgwy-preview.webp',
+      video: '',
     },
   ],
 } as const;
