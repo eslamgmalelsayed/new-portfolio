@@ -109,4 +109,5 @@ code[data-theme*=' '] span {
 
 section {
   content-visibility: auto;
+  contain-intrinsic-height: 100vh;
 }
