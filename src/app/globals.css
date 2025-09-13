@@ -106,3 +106,7 @@ code[data-theme*=' '] span {
     background-color: var(--shiki-dark-bg);
   }
 }
+
+section {
+  content-visibility: auto;
+}
