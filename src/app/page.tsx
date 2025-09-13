@@ -42,6 +42,9 @@ export default function Page() {
                   <AvatarImage
                     alt={`Portrait photo of ${DATA.name}`}
                     src={DATA.avatarUrl}
+                    fetchPriority="high"
+                    decoding="async"
+                    loading="eager"
                   />
                   <AvatarFallback>{DATA.initials}</AvatarFallback>
                 </Avatar>
