@@ -1,3 +1,4 @@
+'use client';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -10,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { OptimizedImage } from '@/components/optimized-image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
+import { useState, useEffect, useRef } from 'react';
 
 // Technology brand colors mapping for first chip only
 const TECH_COLORS: Record<string, { bg: string; text: string }> = {
@@ -18,6 +20,10 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   'Next.js': { bg: 'bg-[#000000]', text: 'text-white' },
   Angular: { bg: 'bg-[#DD0031]', text: 'text-white' },
 };
+
+// Global cache to store video blobs and prevent duplicate downloads
+const videoCache = new Map<string, string>(); // URL -> Blob URL
+const loadingVideos = new Set<string>(); // Track videos currently loading
 
 interface Props {
   title: string;
@@ -48,8 +54,65 @@ export function ProjectCard({
   links,
   className,
 }: Props) {
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const hasTriggeredRef = useRef(false);
+
+  useEffect(() => {
+    if (!video || !cardRef.current || hasTriggeredRef.current) return;
+
+    // If video is already cached, use it immediately
+    if (videoCache.has(video)) {
+      setShouldLoadVideo(true);
+      setVideoSrc(videoCache.get(video)!);
+      hasTriggeredRef.current = true;
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTriggeredRef.current) {
+          hasTriggeredRef.current = true;
+          loadVideo(video);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '200px',
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [video]);
+
+  const loadVideo = async (videoUrl: string) => {
+    if (loadingVideos.has(videoUrl) || videoCache.has(videoUrl)) return;
+
+    loadingVideos.add(videoUrl);
+    setShouldLoadVideo(true);
+
+    try {
+      const response = await fetch(videoUrl);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      videoCache.set(videoUrl, blobUrl);
+      setVideoSrc(blobUrl);
+    } catch (error) {
+      console.error('Failed to load video:', error);
+      // Fallback to original URL
+      setVideoSrc(videoUrl);
+    } finally {
+      loadingVideos.delete(videoUrl);
+    }
+  };
+
   return (
     <Card
+      ref={cardRef}
       className={
         'flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full'
       }
@@ -59,17 +122,24 @@ export function ProjectCard({
         className={cn('block cursor-pointer', className)}
         aria-label={`View project: ${title}`}
       >
-        {video && (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-          />
-        )}
-        {image && (
+        {video && shouldLoadVideo ? (
+          videoSrc ? (
+            <video
+              src={videoSrc}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
+            />
+          ) : (
+            <div className="h-40 w-full bg-muted animate-pulse" />
+          )
+        ) : video && !shouldLoadVideo ? (
+          <div className="h-40 w-full bg-muted animate-pulse" />
+        ) : null}
+
+        {image && !video && (
           <OptimizedImage
             src={image}
             alt={title}
