@@ -36,7 +36,7 @@ export default function Page() {
                 activateVelocityScroll={true}
               />
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY}>
+            <BlurFade delay={BLUR_FADE_DELAY} yOffset={0}>
               <CoolMode>
                 <Avatar className="size-28 border cursor-pointer">
                   <AvatarImage
