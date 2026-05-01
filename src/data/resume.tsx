@@ -167,6 +167,11 @@ export const DATA = {
       technologies: ['Next.js', 'AI integration', 'TypeScript', 'Tailwind CSS'],
       links: [
         {
+          type: 'In Progress',
+          href: '#',
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
           type: 'Demo',
           href: 'https://cvifi.netlify.app',
           icon: <Icons.globe className="size-3" />,
@@ -242,6 +247,52 @@ export const DATA = {
       video: './thoughts-preview.mp4',
     },
     {
+      title: 'Lovable ATS CV Builder',
+      href: 'https://lovable-cv-builder.netlify.app',
+      dates: '2026',
+      active: true,
+      description:
+        'A modern CV builder application that allows users to create and customize their resumes easily. It features a user-friendly interface for inputting personal information, work experience, education, and skills, with options to download the final CV in various formats.',
+      technologies: ['Next.js', 'Lovable AI', 'TypeScript', 'Tailwind CSS'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://lovable-cv-builder.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: 'GitHub',
+          href: 'https://github.com/eslamgmalelsayed/lovable-cv-builder',
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './lovable-cv-preview.mp4',
+    },
+    {
+      title: 'pubgwy store',
+      href: 'https://eslamgmalelsayed.github.io/pubgwy',
+      dates: '2021',
+      active: true,
+      description:
+        'A pubgwy store website built with javascript. It allows you to see the products and the details of the product.',
+      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://eslamgmalelsayed.github.io/pubgwy',
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: 'GitHub',
+          href: 'https://github.com/eslamgmalelsayed/pubgwy',
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: './pubgwy-preview.webp',
+      video: '',
+    },
+    {
       title: 'Movie Search App',
       href: 'https://movie-searchhh-app.netlify.app',
       dates: '2025',
@@ -270,29 +321,6 @@ export const DATA = {
       ],
       image: '',
       video: './movie-preview.mp4',
-    },
-    {
-      title: 'pubgwy store',
-      href: 'https://eslamgmalelsayed.github.io/pubgwy',
-      dates: '2021',
-      active: true,
-      description:
-        'A pubgwy store website built with javascript. It allows you to see the products and the details of the product.',
-      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery'],
-      links: [
-        {
-          type: 'Demo',
-          href: 'https://eslamgmalelsayed.github.io/pubgwy',
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: 'GitHub',
-          href: 'https://github.com/eslamgmalelsayed/pubgwy',
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: './pubgwy-preview.webp',
-      video: '',
     },
   ],
 } as const;
