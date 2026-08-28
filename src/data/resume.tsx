@@ -122,6 +122,24 @@ export const DATA = {
   ],
   projects: [
     {
+      title: 'Sealtech',
+      href: 'https://sealtechsa.com',
+      dates: '2026',
+      active: true,
+      description:
+        'A corporate website for a Saudi technology services company, presenting its services, solutions, and contact channels through a clean, responsive marketing site.',
+      technologies: ['WordPress', 'PHP', 'HTML', 'CSS', 'JavaScript'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://sealtechsa.com',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: './sealtech-preview.mp4',
+    },
+    {
       title: 'Najiz Sa',
       href: 'https://najiz.sa/applications/landing',
       dates: '2022',
