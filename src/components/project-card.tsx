@@ -20,6 +20,7 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   'Next.js': { bg: 'bg-[#000000]', text: 'text-white' },
   Angular: { bg: 'bg-[#DD0031]', text: 'text-white' },
   WordPress: { bg: 'bg-[#21759B]', text: 'text-white' },
+  JavaScript: { bg: 'bg-[#F7DF1E]', text: 'text-black' },
 };
 
 // Global cache to store video blobs and prevent duplicate downloads

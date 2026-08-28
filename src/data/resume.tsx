@@ -164,7 +164,7 @@ export const DATA = {
       active: true,
       description:
         'A pastry shop website built with javascript. It allows you to see the products and the details of the product.',
-      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery', 'JavaScript'],
+      technologies: ['JavaScript', 'HTML', 'CSS', 'Bootstrap', 'JQuery'],
       links: [
         {
           type: 'Demo',
