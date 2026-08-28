@@ -128,14 +128,7 @@ export const DATA = {
       active: true,
       description:
         'A bilingual Arabic/English website for a Saudi insulation and waterproofing contractor established in 1986. It presents the company services, project portfolio, certifications, and careers, with full RTL support and a quote request flow.',
-      technologies: [
-        'WordPress',
-        'PHP',
-        'HTML',
-        'CSS',
-        'JavaScript',
-        'RTL Support',
-      ],
+      technologies: ['WordPress', 'HTML', 'CSS', 'JavaScript', 'RTL Support'],
       links: [
         {
           type: 'Demo',

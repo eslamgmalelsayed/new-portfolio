@@ -19,6 +19,7 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   'Nuxt.js': { bg: 'bg-[#00DC82]', text: 'text-white' },
   'Next.js': { bg: 'bg-[#000000]', text: 'text-white' },
   Angular: { bg: 'bg-[#DD0031]', text: 'text-white' },
+  WordPress: { bg: 'bg-[#21759B]', text: 'text-white' },
 };
 
 // Global cache to store video blobs and prevent duplicate downloads
