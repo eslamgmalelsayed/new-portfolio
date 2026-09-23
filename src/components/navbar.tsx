@@ -27,6 +27,10 @@ export default function Navbar() {
                     'size-12'
                   )}
                   aria-label={item.label}
+                  {...(item.href.startsWith('http') && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
                 >
                   <item.icon className="size-4" />
                 </Link>

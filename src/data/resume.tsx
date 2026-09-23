@@ -1,5 +1,8 @@
 import { Icons } from '@/components/icons';
-import { HomeIcon } from 'lucide-react';
+import { FileTextIcon, HomeIcon } from 'lucide-react';
+
+const RESUME_URL =
+  'https://drive.google.com/file/d/1JBPSHxkCuCgyfw8PR8qOcP8GHCEA2jWp/view?usp=sharing';
 
 export const DATA = {
   name: 'Eslam Gamal Elsayed',
@@ -10,7 +13,7 @@ export const DATA = {
   description:
     'Front-end developer. I love building things and helping people.',
   summary:
-    'Front-end developer with 4+ years of experience specializing in Vue and JavaScript, delivering scalable and high-performance web applications. Adept at solving complex technical challenges by analyzing and debugging issues, optimizing performance, and implementing innovative solutions. Expertise in creating reusable components, enhancing application performance, and integrating APIs in dynamic Single-Page Applications (SPAs). Skilled in collaborating with cross-functional teams to deliver user-centric solutions while adhering to tight deadlines.',
+    'Front-end developer with 5+ years of experience specializing in Vue and JavaScript, delivering scalable and high-performance web applications. Adept at solving complex technical challenges by analyzing and debugging issues, optimizing performance, and implementing innovative solutions. Expertise in creating reusable components, enhancing application performance, and integrating APIs in dynamic Single-Page Applications (SPAs). Skilled in collaborating with cross-functional teams to deliver user-centric solutions while adhering to tight deadlines.',
   avatarUrl: '/me.webp',
   skills: [
     'Vue.js',
@@ -34,7 +37,10 @@ export const DATA = {
     'Figma',
     'Adobe XD',
   ],
-  navbar: [{ href: '/', icon: HomeIcon, label: 'Home' }],
+  navbar: [
+    { href: '/', icon: HomeIcon, label: 'Home' },
+    { href: RESUME_URL, icon: FileTextIcon, label: 'Resume' },
+  ],
   contact: {
     email: 'eslamgmal1@gmail.com',
     tel: '+966570359187',
@@ -122,7 +128,58 @@ export const DATA = {
   ],
   projects: [
     {
+      title: 'Zakroo',
+      featured: true,
+      category: 'side',
+      status: 'in-progress',
+      href: 'https://zakroo.com',
+      dates: '2026',
+      active: true,
+      description:
+        'An AI-first revision companion for Egyptian students from 6th primary to 3rd secondary. It builds one study plan for every subject, explains each mistake instantly in Egyptian Arabic, and brings wrong answers back with spaced review.',
+      technologies: [
+        'Nuxt.js',
+        'TypeScript',
+        'Nuxt UI',
+        'Supabase',
+        'AI integration',
+        'Playwright',
+      ],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://zakroo.com',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: '/zakroo-preview.mp4',
+    },
+    {
+      title: 'Ewsali',
+      featured: true,
+      category: 'side',
+      status: 'in-progress',
+      href: 'https://wasall.netlify.app',
+      dates: '2026',
+      active: true,
+      description:
+        'A QR sticker that lets anyone alert a vehicle owner in Saudi Arabia, with no app and no phone numbers shared. Fleets get anonymous driving reports as weekly patterns and webhooks, with abuse prevention built in.',
+      technologies: ['Nuxt.js', 'TypeScript', 'PostgreSQL', 'Drizzle', 'Redis'],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://wasall.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: '/ewsali-preview.mp4',
+    },
+    {
       title: 'Sealtech Insulation',
+      featured: true,
+      category: 'wordpress',
       href: 'https://sealtechsa.com',
       dates: '2026',
       active: true,
@@ -141,6 +198,8 @@ export const DATA = {
     },
     {
       title: 'Najiz Sa',
+      featured: true,
+      category: 'work',
       href: 'https://najiz.sa/applications/landing',
       dates: '2022',
       active: true,
@@ -159,12 +218,13 @@ export const DATA = {
     },
     {
       title: 'Abu Adel Pastry Shop',
+      category: 'work',
       href: 'https://haliyomak.com',
       dates: '2021',
       active: true,
       description:
-        'A pastry shop website built with javascript. It allows you to see the products and the details of the product.',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'Bootstrap', 'JQuery'],
+        'A bilingual Arabic/English website for an Egyptian pastry and dessert chain. It showcases a menu across nine product categories, party and special-occasion selections, branch locations, a monthly chef’s pick, and a customer survey, with full RTL support.',
+      technologies: ['JavaScript', 'HTML', 'CSS', 'Bootstrap', 'jQuery', 'RTL Support'],
       links: [
         {
           type: 'Demo',
@@ -177,6 +237,8 @@ export const DATA = {
     },
     {
       title: 'CV Builder',
+      category: 'side',
+      status: 'in-progress',
       href: 'https://cvifi.netlify.app',
       dates: '2025',
       active: true,
@@ -184,11 +246,6 @@ export const DATA = {
         'A CV builder application that allows users to create and customize their resumes easily. It features a user-friendly interface for inputting personal information, work experience, education, and skills, with options to download the final CV in various formats.',
       technologies: ['Next.js', 'AI integration', 'TypeScript', 'Tailwind CSS'],
       links: [
-        {
-          type: 'In Progress',
-          href: '#',
-          icon: <Icons.globe className="size-3" />,
-        },
         {
           type: 'Demo',
           href: 'https://cvifi.netlify.app',
@@ -204,36 +261,8 @@ export const DATA = {
       video: './cvifi-preview.mp4',
     },
     {
-      title: 'Task Manager',
-      href: 'https://taske-manager.netlify.app',
-      dates: '2025',
-      active: true,
-      description:
-        'A task manager application built with nextjs and TypeScript. It allows you to create, edit, and delete tasks, as well as mark them as completed or pending. it also has authentication and authorization with supabase.',
-      technologies: [
-        'Next.js',
-        'TypeScript',
-        'Tailwind CSS',
-        'Zod',
-        'Supabase',
-      ],
-      links: [
-        {
-          type: 'Demo',
-          href: 'https://taske-manager.netlify.app',
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: 'GitHub',
-          href: 'https://github.com/eslamgmalelsayed/Task-Manager',
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: '',
-      video: '/task-preview.mp4',
-    },
-    {
       title: 'Thought Cache',
+      category: 'side',
       href: 'https://thought-cache.netlify.app',
       dates: '2025',
       active: true,
@@ -263,82 +292,6 @@ export const DATA = {
       ],
       image: '',
       video: './thoughts-preview.mp4',
-    },
-    {
-      title: 'Lovable ATS CV Builder',
-      href: 'https://lovable-cv-builder.netlify.app',
-      dates: '2026',
-      active: true,
-      description:
-        'A modern CV builder application that allows users to create and customize their resumes easily. It features a user-friendly interface for inputting personal information, work experience, education, and skills, with options to download the final CV in various formats.',
-      technologies: ['Next.js', 'Lovable AI', 'TypeScript', 'Tailwind CSS'],
-      links: [
-        {
-          type: 'Demo',
-          href: 'https://lovable-cv-builder.netlify.app',
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: 'GitHub',
-          href: 'https://github.com/eslamgmalelsayed/lovable-cv-builder',
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: '',
-      video: './lovable-cv-preview.mp4',
-    },
-    {
-      title: 'pubgwy store',
-      href: 'https://eslamgmalelsayed.github.io/pubgwy',
-      dates: '2021',
-      active: true,
-      description:
-        'A pubgwy store website built with javascript. It allows you to see the products and the details of the product.',
-      technologies: ['HTML', 'CSS', 'Bootstrap', 'JQuery'],
-      links: [
-        {
-          type: 'Demo',
-          href: 'https://eslamgmalelsayed.github.io/pubgwy',
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: 'GitHub',
-          href: 'https://github.com/eslamgmalelsayed/pubgwy',
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: './pubgwy-preview.webp',
-      video: '',
-    },
-    {
-      title: 'Movie Search App',
-      href: 'https://movie-searchhh-app.netlify.app',
-      dates: '2025',
-      active: true,
-      description:
-        'a movie search app built with Angular. It allows you to search for movies and tv shows, and see the details of the movie or tv show.',
-      technologies: [
-        'Angular',
-        'Angular Material',
-        'Angular CLI',
-        'Angular Services',
-        'Angular HttpClient',
-        'Angular Forms',
-      ],
-      links: [
-        {
-          type: 'Demo',
-          href: 'https://movie-searchhh-app.netlify.app',
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: 'GitHub',
-          href: 'https://github.com/eslamgmalelsayed/angular-in-practice',
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: '',
-      video: './movie-preview.mp4',
     },
   ],
 } as const;

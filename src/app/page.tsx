@@ -1,10 +1,10 @@
 import BlurFade from '@/components/magicui/blur-fade';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 import { ProjectCard } from '@/components/project-card';
+import { ProjectTabs } from '@/components/project-tabs';
 import { ResumeCard } from '@/components/resume-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { DATA } from '@/data/resume';
+import { Badge } from '@/components/ui/badge';import { DATA } from '@/data/resume';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import { CoolMode } from '@/components/magicui/cool-mode';
@@ -14,6 +14,12 @@ import { ScrollProgress } from '@/components/magicui/scroll-progress';
 import { TextReveal } from '@/components/magicui/text-reveal';
 
 const BLUR_FADE_DELAY = 0.04;
+
+const PROJECT_TABS = [
+  { value: 'work', label: 'Web Apps' },
+  { value: 'wordpress', label: 'WordPress' },
+  { value: 'side', label: 'Side Projects' },
+] as const;
 
 export default function Page() {
   return (
@@ -34,8 +40,7 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 text={DATA.description}
                 activateVelocityScroll={true}
-              />
-            </div>
+              />            </div>
             <BlurFade delay={BLUR_FADE_DELAY} yOffset={0}>
               <CoolMode>
                 <Avatar className="size-28 border cursor-pointer">
@@ -176,27 +181,47 @@ export default function Page() {
               </div>
             </div>
           </BlurFade>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto !mt-0">
-            {DATA.projects.map((project, id) => (
-              <BlurFade
-                key={project.title}
-                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-              >
-                <ProjectCard
-                  href={project.href}
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links}
-                />
-                <BorderBeam />
-              </BlurFade>
-            ))}
-          </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 12} className="!mt-0">
+            <ProjectTabs
+              tabs={PROJECT_TABS.map((tab) => {
+                const projects = DATA.projects
+                  .filter((project) => project.category === tab.value)
+                  .sort((a, b) => Number(b.dates) - Number(a.dates));
+                return {
+                  ...tab,
+                  count: projects.length,
+                  content: (
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+                      {projects.map((project, id) => (
+                        <BlurFade
+                          key={project.title}
+                          delay={id * 0.05}
+                          className="relative rounded-lg"
+                        >
+                          <ProjectCard
+                            href={project.href}
+                            title={project.title}
+                            description={project.description}
+                            dates={project.dates}
+                            tags={project.technologies}
+                            image={project.image}
+                            video={project.video}
+                            links={project.links}
+                            status={
+                              'status' in project ? project.status : undefined
+                            }
+                          />
+                          {'featured' in project && project.featured && (
+                            <BorderBeam />
+                          )}
+                        </BlurFade>
+                      ))}
+                    </div>
+                  ),
+                };
+              })}
+            />
+          </BlurFade>
         </div>
       </section>
       <section id="contact">

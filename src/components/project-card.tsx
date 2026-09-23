@@ -23,9 +23,28 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   JavaScript: { bg: 'bg-[#F7DF1E]', text: 'text-black' },
 };
 
-// Global cache to store video blobs and prevent duplicate downloads
-const videoCache = new Map<string, string>(); // URL -> Blob URL
-const loadingVideos = new Set<string>(); // Track videos currently loading
+const STATUS_LABELS = {
+  'in-progress': { label: 'In Progress', dot: 'bg-emerald-400' },
+} as const;
+
+// Each video is downloaded once and played from an in-memory blob URL, so
+// switching tabs or scrolling away and back never hits the network again.
+const videoBlobs = new Map<string, Promise<string>>();
+
+function loadVideoBlob(url: string) {
+  let blobUrl = videoBlobs.get(url);
+  if (!blobUrl) {
+    blobUrl = fetch(url)
+      .then((res) => res.blob())
+      .then((blob) => URL.createObjectURL(blob))
+      .catch(() => {
+        videoBlobs.delete(url);
+        return url;
+      });
+    videoBlobs.set(url, blobUrl);
+  }
+  return blobUrl;
+}
 
 interface Props {
   title: string;
@@ -42,6 +61,7 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  status?: keyof typeof STATUS_LABELS;
 }
 
 export function ProjectCard({
@@ -55,62 +75,35 @@ export function ProjectCard({
   video,
   links,
   className,
+  status,
 }: Props) {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const hasTriggeredRef = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isVisibleRef = useRef(false);
 
+  // Only load the video once the card is near the viewport,
+  // then play while visible and pause when scrolled away or hidden.
   useEffect(() => {
-    if (!video || !cardRef.current || hasTriggeredRef.current) return;
-
-    // If video is already cached, use it immediately
-    if (videoCache.has(video)) {
-      setShouldLoadVideo(true);
-      setVideoSrc(videoCache.get(video)!);
-      hasTriggeredRef.current = true;
-      return;
-    }
+    if (!video || !cardRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasTriggeredRef.current) {
-          hasTriggeredRef.current = true;
-          loadVideo(video);
-          observer.disconnect();
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          loadVideoBlob(video).then(setVideoSrc);
+          videoRef.current?.play().catch(() => {});
+        } else {
+          videoRef.current?.pause();
         }
       },
-      {
-        rootMargin: '200px',
-        threshold: 0.1,
-      }
+      { rootMargin: '200px' }
     );
 
     observer.observe(cardRef.current);
     return () => observer.disconnect();
   }, [video]);
-
-  const loadVideo = async (videoUrl: string) => {
-    if (loadingVideos.has(videoUrl) || videoCache.has(videoUrl)) return;
-
-    loadingVideos.add(videoUrl);
-    setShouldLoadVideo(true);
-
-    try {
-      const response = await fetch(videoUrl);
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-
-      videoCache.set(videoUrl, blobUrl);
-      setVideoSrc(blobUrl);
-    } catch (error) {
-      console.error('Failed to load video:', error);
-      // Fallback to original URL
-      setVideoSrc(videoUrl);
-    } finally {
-      loadingVideos.delete(videoUrl);
-    }
-  };
 
   return (
     <Card
@@ -121,25 +114,36 @@ export function ProjectCard({
     >
       <Link
         href={href || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
         className={cn('block cursor-pointer', className)}
         aria-label={`View project: ${title}`}
       >
-        {video && shouldLoadVideo ? (
-          videoSrc ? (
-            <video
-              src={videoSrc}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-            />
-          ) : (
-            <div className="h-40 w-full bg-muted animate-pulse" />
-          )
-        ) : video && !shouldLoadVideo ? (
-          <div className="h-40 w-full bg-muted animate-pulse" />
-        ) : null}
+        {video && (
+          <div className="relative h-40 w-full bg-muted">
+            {!isVideoReady && (
+              <div className="absolute inset-0 animate-pulse bg-muted" />
+            )}
+            {videoSrc && (
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                onLoadedData={(e) => {
+                  setIsVideoReady(true);
+                  if (!isVisibleRef.current) e.currentTarget.pause();
+                }}
+                className={cn(
+                  'pointer-events-none mx-auto h-40 w-full object-cover object-top transition-opacity duration-300', // needed because random black line at bottom of video
+                  isVideoReady ? 'opacity-100' : 'opacity-0'
+                )}
+              />
+            )}
+          </div>
+        )}
 
         {image && !video && (
           <OptimizedImage
@@ -155,9 +159,36 @@ export function ProjectCard({
         <div className="space-y-1">
           <div className="flex justify-between items-center">
             <CardTitle className="mt-1 text-base">{title}</CardTitle>
-            <Badge variant="secondary" className="font-sans text-xs">
-              {dates}
-            </Badge>
+            <div className="flex shrink-0 items-center gap-1">
+              {status && (
+                <Badge
+                  variant="secondary"
+                  className="gap-1.5 whitespace-nowrap font-sans text-xs hover:bg-secondary"
+                >
+                  <span className="relative flex size-1.5">
+                    <span
+                      className={cn(
+                        'absolute inline-flex size-full animate-ping rounded-full opacity-75',
+                        STATUS_LABELS[status].dot
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        'relative inline-flex size-1.5 rounded-full',
+                        STATUS_LABELS[status].dot
+                      )}
+                    />
+                  </span>
+                  {STATUS_LABELS[status].label}
+                </Badge>
+              )}
+              <Badge
+                variant="secondary"
+                className="font-sans text-xs hover:bg-secondary"
+              >
+                {dates}
+              </Badge>
+            </div>
           </div>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace('https://', '').replace('www.', '').replace('/', '')}
@@ -180,10 +211,10 @@ export function ProjectCard({
                   className={cn(
                     'px-1 py-0 text-[10px]',
                     shouldUseBrandColor
-                      ? `${techColor.bg} ${techColor.text} hover:opacity-80`
-                      : ''
+                      ? `border-transparent ${techColor.bg} ${techColor.text}`
+                      : 'hover:bg-secondary'
                   )}
-                  variant={shouldUseBrandColor ? undefined : 'secondary'}
+                  variant={shouldUseBrandColor ? 'outline' : 'secondary'}
                   key={tag}
                 >
                   {tag}
