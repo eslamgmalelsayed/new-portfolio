@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 interface Tab {
   value: string;
   label: string;
+  shortLabel?: string;
   count: number;
   content: React.ReactNode;
 }
@@ -69,8 +70,11 @@ export function ProjectTabs({ tabs }: { tabs: Tab[] }) {
               {/* White text in difference mode inverts exactly where the pill
                   is, so the label stays readable while the pill slides. */}
               <span className="relative z-10 text-white mix-blend-difference">
-                {tab.label}
-                <span className="ml-1.5 text-xs opacity-60">{tab.count}</span>
+                <span className="sm:hidden">{tab.shortLabel ?? tab.label}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+                {tab.count > 0 && (
+                  <span className="ml-1.5 text-xs opacity-60">{tab.count}</span>
+                )}
               </span>
             </button>
           );

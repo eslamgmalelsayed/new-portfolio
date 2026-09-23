@@ -2,6 +2,7 @@ import BlurFade from '@/components/magicui/blur-fade';
 import BlurFadeText from '@/components/magicui/blur-fade-text';
 import { ProjectCard } from '@/components/project-card';
 import { ProjectTabs } from '@/components/project-tabs';
+import { SmartphoneIcon } from 'lucide-react';
 import { ResumeCard } from '@/components/resume-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';import { DATA } from '@/data/resume';
@@ -16,9 +17,10 @@ import { TextReveal } from '@/components/magicui/text-reveal';
 const BLUR_FADE_DELAY = 0.04;
 
 const PROJECT_TABS = [
-  { value: 'work', label: 'Web Apps' },
-  { value: 'wordpress', label: 'WordPress' },
-  { value: 'side', label: 'Side Projects' },
+  { value: 'work', label: 'Web Apps', shortLabel: 'Web' },
+  { value: 'wordpress', label: 'WordPress', shortLabel: 'WordPress' },
+  { value: 'side', label: 'Side Projects', shortLabel: 'Side' },
+  { value: 'mobile', label: 'Mobile Apps', shortLabel: 'Mobile' },
 ] as const;
 
 export default function Page() {
@@ -190,7 +192,19 @@ export default function Page() {
                 return {
                   ...tab,
                   count: projects.length,
-                  content: (
+                  content: projects.length === 0 ? (
+                    <BlurFade className="mx-auto max-w-[800px]">
+                      <div className="flex min-h-64 flex-col items-center justify-center gap-3 rounded-lg border border-dashed p-8 text-center">
+                        <div className="flex size-12 items-center justify-center rounded-full bg-muted">
+                          <SmartphoneIcon className="size-5 text-muted-foreground" />
+                        </div>
+                        <p className="font-semibold">Coming soon</p>
+                        <p className="max-w-xs text-sm text-muted-foreground">
+                          Mobile apps I&apos;m working on will show up here.
+                        </p>
+                      </div>
+                    </BlurFade>
+                  ) : (
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
                       {projects.map((project, id) => (
                         <BlurFade
