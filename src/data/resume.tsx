@@ -187,6 +187,7 @@ export const DATA = {
         'An Arabic-first WordPress block theme for landing pages, with five complete demos for real estate, contracting, law firms, clinics and agencies, plus 138 ready patterns. Built only on native blocks, with no plugins or page builder, RTL by default using CSS logical properties, and instant navigation via the Interactivity API.',
       technologies: [
         'WordPress',
+        'PHP',
         'Block Theme',
         'Interactivity API',
         'CSS',
