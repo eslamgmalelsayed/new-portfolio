@@ -177,6 +177,32 @@ export const DATA = {
       video: '/ewsali-preview.mp4',
     },
     {
+      title: 'Intilaq',
+      featured: true,
+      category: 'wordpress',
+      href: 'https://intilaq-demo.netlify.app',
+      dates: '2026',
+      active: true,
+      description:
+        'An Arabic-first WordPress block theme for landing pages, with five complete demos for real estate, contracting, law firms, clinics and agencies, plus 138 ready patterns. Built only on native blocks, with no plugins or page builder, RTL by default using CSS logical properties, and instant navigation via the Interactivity API.',
+      technologies: [
+        'WordPress',
+        'Block Theme',
+        'Interactivity API',
+        'CSS',
+        'RTL Support',
+      ],
+      links: [
+        {
+          type: 'Demo',
+          href: 'https://intilaq-demo.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: '/intilaq-preview.mp4',
+    },
+    {
       title: 'Sealtech Insulation',
       featured: true,
       category: 'wordpress',
