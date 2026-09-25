@@ -224,6 +224,9 @@ export default function Page() {
                             status={
                               'status' in project ? project.status : undefined
                             }
+                            portrait={
+                              'portrait' in project ? project.portrait : undefined
+                            }
                           />
                           {'featured' in project && project.featured && (
                             <BorderBeam />

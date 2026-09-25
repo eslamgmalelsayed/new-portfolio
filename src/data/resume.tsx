@@ -128,6 +128,28 @@ export const DATA = {
   ],
   projects: [
     {
+      title: 'Advocate Manager',
+      category: 'mobile',
+      status: 'in-progress',
+      href: '',
+      dates: '2026',
+      active: true,
+      description:
+        'An Android app for running a law office in Egypt entirely from the phone: cases, hearings and the daily court roll, automatically calculated appeal deadlines, clients and powers of attorney, a document archive with Arabic OCR, tasks, fees, expenses and payroll. All data stays on the device, with file-based backup and restore.',
+      technologies: [
+        'Flutter',
+        'Dart',
+        'Riverpod',
+        'Drift (SQLite)',
+        'ML Kit',
+        'OCR',
+      ],
+      links: [],
+      image: '',
+      video: '/advocate-preview.mp4',
+      portrait: true,
+    },
+    {
       title: 'Zakroo',
       featured: true,
       category: 'side',

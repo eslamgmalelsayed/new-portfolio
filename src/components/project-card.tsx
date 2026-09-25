@@ -21,6 +21,7 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   Angular: { bg: 'bg-[#DD0031]', text: 'text-white' },
   WordPress: { bg: 'bg-[#21759B]', text: 'text-white' },
   JavaScript: { bg: 'bg-[#F7DF1E]', text: 'text-black' },
+  Flutter: { bg: 'bg-[#02569B]', text: 'text-white' },
 };
 
 const STATUS_LABELS = {
@@ -62,6 +63,8 @@ interface Props {
   }[];
   className?: string;
   status?: keyof typeof STATUS_LABELS;
+  /** Tall phone recording: shown inside a phone frame instead of cropped. */
+  portrait?: boolean;
 }
 
 export function ProjectCard({
@@ -76,6 +79,7 @@ export function ProjectCard({
   links,
   className,
   status,
+  portrait,
 }: Props) {
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
@@ -105,6 +109,63 @@ export function ProjectCard({
     return () => observer.disconnect();
   }, [video]);
 
+  const videoElement = videoSrc && (
+    <video
+      ref={videoRef}
+      src={videoSrc}
+      autoPlay
+      loop
+      muted
+      playsInline
+      onLoadedData={(e) => {
+        setIsVideoReady(true);
+        if (!isVisibleRef.current) e.currentTarget.pause();
+      }}
+      className={cn(
+        'pointer-events-none transition-opacity duration-300',
+        portrait
+          ? 'block w-full'
+          : 'mx-auto h-40 w-full object-cover object-top', // needed because random black line at bottom of video
+        isVideoReady ? 'opacity-100' : 'opacity-0'
+      )}
+    />
+  );
+
+  const media = (
+    <>
+      {video && (
+        <div
+          className={cn(
+            'relative h-40 w-full overflow-hidden bg-muted',
+            portrait && 'bg-gradient-to-b from-muted to-muted/40'
+          )}
+        >
+          {!isVideoReady && (
+            <div className="absolute inset-0 animate-pulse bg-muted" />
+          )}
+          {portrait ? (
+            // Phone frame rising from the bottom edge of the preview
+            <div className="absolute left-1/2 top-4 w-32 -translate-x-1/2 overflow-hidden rounded-t-[1.25rem] border-4 border-b-0 border-foreground/90 bg-background shadow-xl">
+              {videoElement}
+            </div>
+          ) : (
+            videoElement
+          )}
+        </div>
+      )}
+
+      {image && !video && (
+        <OptimizedImage
+          src={image}
+          alt={title}
+          width={500}
+          height={300}
+          className="h-40 w-full overflow-hidden object-cover object-top"
+        />
+      )}
+    </>
+  );
+
   return (
     <Card
       ref={cardRef}
@@ -112,49 +173,19 @@ export function ProjectCard({
         'flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full'
       }
     >
-      <Link
-        href={href || '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn('block cursor-pointer', className)}
-        aria-label={`View project: ${title}`}
-      >
-        {video && (
-          <div className="relative h-40 w-full bg-muted">
-            {!isVideoReady && (
-              <div className="absolute inset-0 animate-pulse bg-muted" />
-            )}
-            {videoSrc && (
-              <video
-                ref={videoRef}
-                src={videoSrc}
-                autoPlay
-                loop
-                muted
-                playsInline
-                onLoadedData={(e) => {
-                  setIsVideoReady(true);
-                  if (!isVisibleRef.current) e.currentTarget.pause();
-                }}
-                className={cn(
-                  'pointer-events-none mx-auto h-40 w-full object-cover object-top transition-opacity duration-300', // needed because random black line at bottom of video
-                  isVideoReady ? 'opacity-100' : 'opacity-0'
-                )}
-              />
-            )}
-          </div>
-        )}
-
-        {image && !video && (
-          <OptimizedImage
-            src={image}
-            alt={title}
-            width={500}
-            height={300}
-            className="h-40 w-full overflow-hidden object-cover object-top"
-          />
-        )}
-      </Link>
+      {href ? (
+        <Link
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn('block cursor-pointer', className)}
+          aria-label={`View project: ${title}`}
+        >
+          {media}
+        </Link>
+      ) : (
+        <div className={cn('block', className)}>{media}</div>
+      )}
       <CardHeader className="px-2">
         <div className="space-y-1">
           <div className="flex justify-between items-center">
