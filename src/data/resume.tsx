@@ -199,6 +199,37 @@ export const DATA = {
       video: '/ewsali-preview.mp4',
     },
     {
+      title: 'Al-Mohamy',
+      category: 'side',
+      status: 'in-progress',
+      href: 'https://almohamy-eg.netlify.app',
+      dates: '2026',
+      active: true,
+      description:
+        'A law-office management product for Egypt, with an Android app and a web version for the office computer built from one Flutter codebase. It covers cases and the daily court roll, appeal deadlines calculated around public holidays, a document archive with Arabic OCR and AI summaries, fees and team tasks, all synced across the office through Supabase and working offline in court.\n\n**Web app demo login:** 01091081438 / 123456',
+      technologies: [
+        'Flutter',
+        'Supabase',
+        'SQLite (WASM)',
+        'Gemini AI',
+        'Offline Sync',
+      ],
+      links: [
+        {
+          type: 'Website',
+          href: 'https://almohamy-eg.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: 'Web App',
+          href: 'https://almohamy-app.netlify.app',
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: '',
+      video: '/almohamy-preview.mp4',
+    },
+    {
       title: 'Intilaq',
       featured: true,
       category: 'wordpress',
